@@ -1,0 +1,52 @@
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <title>PubSub Client</title>
+	<input id="clickMe" type="button" value="disconnect" onclick="disconnect();" />
+	<input id="clickMe" type="button" value="connect" onclick="connect();" />
+
+    <script type="text/javascript" src="main.js" ></script>
+    <script type="text/javascript">
+
+    	// import {PubSubClient} from 'index.js';	
+    	  var pubSub = new PubSubClient('ws://localhost:3001', {
+		    connect: true,
+		    reconnect: true,
+		  })
+
+		  const topicName = 'abc';
+
+		  pubSub.subscribe(topicName, (message) => {
+		    console.log(`Got message from topic ${topicName}`, message)
+		  })
+
+		  //publish a message to topic
+		  pubSub.publish(topicName,
+		    {title: 'Hello subscribers in the topic abc', body: 'How are you ?'})
+
+		  // Broadcast send message to subscribers but not me
+		  pubSub.broadcast(topicName, {body: 'this is broadcast message'})
+
+		  // Make global for console access
+		  window.ps = pubSub
+
+		function disconnect (){
+    		console.log("disconnect");
+
+    		pubSub.disconnect();
+
+    	}
+
+    	function connect(){
+    		console.log("Connecting");
+    		pubSub.connect();
+    	}	
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
