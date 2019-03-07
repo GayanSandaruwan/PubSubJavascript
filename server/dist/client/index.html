@@ -122,7 +122,7 @@
 		  },  (allMessageQueue)=>{
 		  		console.log(allMessageQueue);
 
-		  		// this.topics = allMessageQueue;
+		  		this.topics = allMessageQueue;
 
 		  		var topicsArray = Object.keys(allMessageQueue).map(function(key) {
 
@@ -175,14 +175,8 @@
     		console.log("Connecting");
     		pubSub.reconnect( (allMessageQueue)=>{
 		  		console.log(allMessageQueue);
-		  		// this.topics = allMessageQueue;
-		  		// showMessageTable();
-
-		  		var topicsArray = Object.keys(allMessageQueue).map(function(key) {
-
-		  				addMessageTotable(key, allMessageQueue[key] )
-			   			return {topic : key, message: allMessageQueue[key]};
-					});
+		  		this.topics = allMessageQueue;
+		  		showMessageTable();
 		  	});
 
     		subscribeToTopicChannel();
